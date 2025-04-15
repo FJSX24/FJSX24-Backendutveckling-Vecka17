@@ -1,0 +1,167 @@
+🧭 Workshop – Torsdag v.17
+
+📆 Datum: 2025-04-24
+🕘 Tid: 09.00–15.00
+📍 Plats: Ordinarie schema
+🎯 Tema: SwaggerHub, Mockdriven utveckling & backendintegration via async/await
+
+-----------------------------
+✨ Syfte
+
+Att träna på mockdriven utveckling (MDD) genom att arbeta från dokumentation i SwaggerHub mot mock-server och koppla detta till en backend i Express. Frontend används enbart som verktyg för att testa och verifiera att backend följer dokumentationen. Fokus ligger på API-design, dokumentation, async/await och utveckling med kontrakt i centrum.
+
+-----------------------------
+🎯 Lärandemål
+
+K6: Beskriva hur asynkron programmering används för att hantera API-förfrågningar och databasanrop.
+
+F4: Utföra asynkrona operationer för att hantera API-förfrågningar.
+
+-----------------------------
+🧠 Agenda
+
+09.00–09.20	🎓 Intro & mål	Vad innebär Mock-Driven Development? Hur kopplar vi frontend till mock-API?
+
+09.20–10.30	💻 Workshopdel 1	Ladda upp swagger.yaml till SwaggerHub, aktivera mock-server, testa med fetch & Postman
+
+10.30–10.45	☕ Paus	–
+
+10.45–12.00	💻 Workshopdel 2	Skapa en frontend som hämtar mockdata från SwaggerHub via async/await
+
+12.00–13.00	🍝 Lunchpaus	–
+
+13.00–14.15	💻 Workshopdel 3	Implementera backend i Express utifrån Swagger-spec (Mock → Backend)
+
+14.15–15.00	🔁 Demo & Reflektion	Visa: Swagger → Mock → Frontend → Backend. Diskutera vad som var svårt & vad som funkade
+
+-----------------------------
+📚 PowerPoint & Talarmanus
+
+Slide 1: Vad är Mockdriven utveckling (MDD)?
+
+🗣️ "Vi börjar idag inte med koden – vi börjar med dokumentationen. SwaggerHub ger oss en mockserver vi kan anropa direkt – även om backend inte är klar än."
+
+-----------------------------
+Slide 2: SwaggerHub mockserver – vad den är och hur vi använder den
+
+🗣️ "SwaggerHub genererar en virtuell server åt oss utifrån vår swagger.yaml. Vi kan anropa den som om vi hade ett riktigt backend."
+
+-----------------------------
+Slide 3: Från dokumentation till backend
+
+🗣️ "När frontend fungerar mot mockservern vet vi att vårt API är tydligt definierat. Då kan vi bygga backend exakt enligt dokumentationen."
+
+-----------------------------
+-----------------------------
+-----------------------------
+💻 Code-Along – Från Swagger i Express → SwaggerHub → Mock → Frontend
+
+Här är hur du kan bygga upp torsdagens code-along som en bro mellan Swagger i lokal utveckling (Swagger UI + swagger-jsdoc) och SwaggerHub (mockdriven utveckling + publicering):
+
+🟨 Bakgrund:
+
+Förra veckan dokumenterade ni ert lokala Express-API med Swagger-kommentarer och visade det med Swagger UI.
+Idag tar vi det vidare genom att publicera det i SwaggerHub och koppla på mock-servern – för att sedan verifiera dokumentationen med ett riktigt fetch()-anrop från frontend.
+
+📝 Projektstruktur:
+swagger-to-swaggerhub/
+├── routes/
+│   └── user.js          # Innehåller dina Swagger-kommenterade routes
+├── swagger/
+│   └── swagger-export.yaml # Exporterad version till SwaggerHub
+├── index.js               # Express-server med Swagger UI
+├── package.json
+└── public/
+    └── index.html         # Frontend för att testa mock-anrop
+    └── script.js
+
+
+-----------------------------
+Del 1 – Återanvänd din tidigare kod från Swagger i Express
+
+✅ Steg 1: Lägg in Swagger-konfigurationen i index.js
+
+Genomför den koden
+
+-----------------------------
+✅ Steg 2: Kontrollera dina @swagger-kommentarer i routesCA/userCA.js
+
+Genomför den koden
+
+-----------------------------
+💾 Exportera swagger.yaml
+
+Gå till din lokala Swagger UI:
+→ http://localhost:8080/api-docs
+
+Klicka på "Raw" eller "Export" längst upp i Swagger-gränssnittet.
+(Du kan också högerklicka och "Visa sidkälla", kopiera hela JSON:en)
+
+Gå till https://editor.swagger.io/
+
+Välj "Convert to YAML" om du har JSON
+
+Välj File > Save as YAML
+
+Spara som swagger/swagger-export.yaml i ditt projekt.
+
+-----------------------------
+🌐 Importera swagger.yaml till SwaggerHub
+
+Gå till https://app.swaggerhub.com
+
+Logga in eller skapa ett gratiskonto
+
+Klicka på Create New > API
+
+Fyll i:
+
+Name: my-exported-api
+
+Version: 1.0.0
+
+Format: YAML
+
+Base: OpenAPI 3.0
+
+Klicka på Import file → välj din swagger-export.yaml
+
+Spara → SwaggerHub laddar din dokumentation och visar en mock URL uppe till höger, t.ex.:
+https://virtserver.swaggerhub.com/dittnamn/my-exported-api/1.0.0/api/users
+
+-----------------------------
+🧪 Testa att allt fungerar
+
+✅ I Postman:
+Skicka GET till din mock-URL (t.ex. /api/users)
+
+Du bör få en dummy-respons (SwaggerHub genererar mockdata automatiskt)
+
+✅ I frontend (public/script.js)
+
+Genomför den koden
+
+index.html
+
+Genomför den koden
+
+Öppna filen i webbläsaren (t.ex. via Live Server) – klicka på knappen, och se datan laddas från SwaggerHub-mockservern!
+
+-----------------------------
+-----------------------------
+-----------------------------
+Dags för övningar
+
+-----------------------------
+-----------------------------
+-----------------------------
+🔁 Gruppdiskussion 
+
+Vad lärde ni er om API-design genom att börja med mock?
+
+Kände ni att er dokumentation var tillräcklig?
+
+Vad var enklast? Vad var klurigast?
+
+Hur hade ni gjort i ett riktigt team med frontend/backend?
+

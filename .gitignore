@@ -1,0 +1,33 @@
+# Node modules (installeras via package.json)
+node_modules/
+
+# Miljöfiler (innehåller API-nycklar, lösenord osv.)
+.env
+
+# Loggfiler
+logs/
+*.log
+npm-debug.log*
+
+# Operativsystem-specifika filer
+.DS_Store      # macOS
+Thumbs.db      # Windows
+
+# Test-kataloger/rapporter
+coverage/
+jest-coverage/
+
+# Byggmappar (om man bygger t.ex. en dist/)
+dist/
+
+# SwaggerHub (om man laddar ner filer)
+swagger.json
+swagger.yaml
+
+# IDE/editor-filer
+.vscode/
+.idea/
+
+# Tempfiler
+*.tmp
+*.swp

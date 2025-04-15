@@ -1,0 +1,62 @@
+🧩 Självständiga övningar
+
+🟢 Lätt
+
+- Skapa eller uppdatera ett swagger.yaml för en resurs, t.ex. /api/products.
+
+- Publicera i SwaggerHub och aktivera mockservern.
+
+- Testa att mockservern svarar korrekt i Postman.
+
+- Anropa mockservern via fetch() i en enkel HTML-sida – syftet är att verifiera att din dokumentation fungerar som ett API-kontrakt.
+
+-------------------------
+🟠 Medel
+
+- Lägg till GET, POST och minst en path parameter i din swagger-spec.
+
+- Kontrollera att dokumentationen har rätt parameters, requestBody och responses.
+
+- Gör anrop från frontend till dessa endpoints och kontrollera:
+
+    - Är det tydligt vad som krävs i varje anrop?
+
+    - Ser svaren ut som frontend förväntar sig?
+
+- Justera dokumentationen om något inte stämmer (t.ex. fel i mock-responsen).
+
+-------------------------
+🔵 Svår
+
+- Bygg en Express-backend som exakt matchar din Swagger-dokumentation.
+
+    - Samma paths, metoder, req.body och responses.
+
+- Verifiera att frontend fungerar både mot:
+
+    - Mockservern (SwaggerHub)
+
+    - Din lokala backend
+
+- Byt mellan mock-URL och localhost i din frontend (config.js) och se om båda fungerar lika bra.
+
+-------------------------
+🧪 Extra Avancerade Utmaningar
+
+- Jobba mock-first: Börja med Swagger-spec → bygg backend enbart utifrån dokumentationen.
+
+- Implementera felhantering i backend (400, 404, 500) enligt din Swagger-spec.
+
+- Lägg till OpenAPI examples i dokumentationen för att visa exempel på JSON som skickas och tas emot.
+
+- Använd swagger-ui-express i din backend för att exponera Swagger-dokumentation lokalt (t.ex. på /api-docs).
+
+-------------------------
+✅ Tips
+🧠 Tänk: “Kan någon annan bygga frontend till mitt API bara genom att läsa dokumentationen?”
+
+🔄 Mocken är en spegel av din dokumentation – om mocken är fel är din dokumentation fel.
+
+💡 SwaggerHub visar om din dokumentation är “produktionsklar” – behandla den som ett kontrakt.
+
+🛠 När frontend använder mockservern och det fungerar – vet du att din API-design håller.
