@@ -1,0 +1,43 @@
+✏️ Självständiga Övningar
+
+🟢 Lätt
+- Gör ett fetch()-anrop mot din SwaggerHub-mockserver.
+
+- Skriv ut resultatet i konsolen eller DOM (innerText i en <pre> eller <div>).
+
+------------------------------
+🟠 Medel
+
+- Bygg om anropet till async/await
+
+- Lägg till try/catch för att hantera fel
+
+- Visa statuskod i konsolen
+
+------------------------------
+🔵 Svår
+
+- Sätt upp knapp för att manuellt anropa API:t (t.ex. "Hämta användare")
+
+- Lägg till laddningsmeddelande (t.ex. Laddar...)
+
+- Hämta en specifik resurs via query eller path
+
+------------------------------
+🧪 Extra Avancerade Utmaningar
+
+- Anropa en POST-route på din SwaggerHub mockserver (om den finns definierad)
+
+- Bygg ett enkelt formulär för att posta data
+
+- Refaktorera koden till moduler (om React används)
+
+------------------------------
+✅ Tips
+🔍 Testa API:et i Postman först
+
+🧠 Använd console.log() i varje steg
+
+🔗 Kontrollera Mock Server URL i SwaggerHub
+
+💬 Fråga varandra när det fastnar
