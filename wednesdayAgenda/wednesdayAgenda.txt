@@ -105,7 +105,7 @@ const url = "https://virtserver.swaggerhub.com/fjsx24-fcc/test-api/1.0.0/devices
 
 Öppna Postman
 
-Klistra in din mockserver-URL (t.ex. https://virtserver.swaggerhub.com/fjsx24-fcc/test-api/1.0.0/devices)
+Klistra in din mockserver-URL (t.ex. https://virtserver.swaggerhub.com/fjsx24-fcc/test-api2/1.0.0/inventory)
 
 Skicka GET-anrop och se om du får ett JSON-svar
 
