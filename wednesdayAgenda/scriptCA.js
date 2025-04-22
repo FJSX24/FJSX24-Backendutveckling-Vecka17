@@ -2,7 +2,7 @@ document.querySelector("#load").addEventListener("click", fetchData);
 
 async function fetchData() {
   const url =
-    // "https://virtserver.swaggerhub.com/fjsx24-fcc/my-exported-api/1.0.0/api/users"; // ← Byt ut
+   
     "https://virtserver.swaggerhub.com/fjsx24-fcc/test-api/1.0.0/devices"; // ← Byt ut
 
   document.querySelector("#status").innerText = "Laddar...";
