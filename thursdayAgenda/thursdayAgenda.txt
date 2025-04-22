@@ -92,9 +92,12 @@ Genomför den koden
 💾 Exportera swagger.yaml
 
 Gå till din lokala Swagger UI:
-→ http://localhost:8080/api-docs
+→ http://localhost:8081/api-docs
 
-Klicka på "Raw" eller "Export" längst upp i Swagger-gränssnittet.
+📍 Gå till:
+http://localhost:8081/swagger.json
+
+Det här visar rå JSON för din API-dokumentation.
 (Du kan också högerklicka och "Visa sidkälla", kopiera hela JSON:en)
 
 Gå till https://editor.swagger.io/

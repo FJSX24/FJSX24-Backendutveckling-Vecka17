@@ -1,10 +1,17 @@
 import express from "express";
+
+// Lägg till app.use(cors()) för att lösa CORS
+import cors from "cors";
+
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import userRouterCA from "./routesCA/userCA.js";
 
+
 const app = express();
-const PORT = 8080;
+const PORT = 8081;
+
+app.use(cors()); 
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -16,12 +23,12 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:8080",
+        url: "http://localhost:8081",
         description: "Lokal utvecklingsserver",
       },
     ],
   },
-  apis: ["./routes/*.js"], // Här letar Swagger efter @swagger-kommentarer
+  apis: ["./routesCA/*.js"], // Här letar Swagger efter @swagger-kommentarer
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

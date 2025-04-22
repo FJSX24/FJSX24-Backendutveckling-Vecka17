@@ -3,10 +3,11 @@ info:
   title: RESTful API
   description: API-dokumentation med Swagger
   version: 1.0.0
-
-  servers:
-    - url: https://virtserver.swaggerhub.com/fjsx24-fcc/my-exported-api/1.0.0
-      description: Mock Server (auto-genererad av SwaggerHub)
+servers:
+  - url: https://virtserver.swaggerhub.com/fjsx24-fcc/my-exported-api/1.0.0
+    description: Mock Server (auto-genererad av SwaggerHub)
+  - url: http://localhost:8081
+    description: Lokal utvecklingsserver
 
 paths:
   /api/users:
