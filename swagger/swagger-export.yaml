@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.0",
+  "info":
+    {
+      "title": "Mandus RESTful API",
+      "description": "API-dokumentation med Swagger",
+      "version": "1.0.0",
+    },
+  "servers":
+    [{ "url": "http://localhost:8000", "description": "Local dev server" }],
+  "components":
+    {
+      "schemas":
+        {
+          "User":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "id":
+                    {
+                      "type": "integer",
+                      "description": "Användarens unika id",
+                      "example": 1,
+                    },
+                  "name":
+                    {
+                      "type": "string",
+                      "description": "Användarens namn",
+                      "example": "Kajsa",
+                    },
+                },
+            },
+          "UserResponse":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "message":
+                    {
+                      "type": "string",
+                      "description": "Bekräftelsemeddelande",
+                    },
+                  "user": { "$ref": "#/components/schemas/User" },
+                },
+            },
+        },
+    },
+  "paths":
+    {
+      "/api/users":
+        {
+          "get":
+            {
+              "tags": ["users"],
+              "summary": "Hämta alla användare",
+              "description": "Returnerar en lista med alla användare",
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "Lyckad hämtning av alla användare",
+                      "content":
+                        {
+                          "application/json":
+                            {
+                              "schema":
+                                {
+                                  "type": "array",
+                                  "items":
+                                    {
+                                      "type": "object",
+                                      "properties":
+                                        {
+                                          "id":
+                                            {
+                                              "type": "integer",
+                                              "description": "Användarens unika id",
+                                            },
+                                          "name":
+                                            {
+                                              "type": "string",
+                                              "description": "Användarens namn",
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+          "post":
+            {
+              "tags": ["users"],
+              "summary": "Skapa en ny användare",
+              "description": "Skapar en ny användare",
+              "requestBody":
+                {
+                  "required": true,
+                  "content":
+                    {
+                      "application/json":
+                        { "schema": { "$ref": "#/components/schemas/User" } },
+                    },
+                },
+              "responses":
+                {
+                  "201":
+                    {
+                      "description": "Användare skapad",
+                      "content":
+                        {
+                          "application/json":
+                            {
+                              "schema":
+                                { "$ref": "#/components/schemas/UserResponse" },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+  "tags": [],
+}
