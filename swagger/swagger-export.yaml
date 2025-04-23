@@ -7,45 +7,13 @@
       "version": "1.0.0",
     },
   "servers":
-    [{ "url": "http://localhost:8000", "description": "Local dev server" }],
-  "components":
-    {
-      "schemas":
-        {
-          "User":
-            {
-              "type": "object",
-              "properties":
-                {
-                  "id":
-                    {
-                      "type": "integer",
-                      "description": "Användarens unika id",
-                      "example": 1,
-                    },
-                  "name":
-                    {
-                      "type": "string",
-                      "description": "Användarens namn",
-                      "example": "Kajsa",
-                    },
-                },
-            },
-          "UserResponse":
-            {
-              "type": "object",
-              "properties":
-                {
-                  "message":
-                    {
-                      "type": "string",
-                      "description": "Bekräftelsemeddelande",
-                    },
-                  "user": { "$ref": "#/components/schemas/User" },
-                },
-            },
-        },
-    },
+    [
+      {
+        "description": "SwaggerHub API Auto Mocking",
+        "url": "https://virtserver.swaggerhub.com/fjsx24-fcc/test-onsdag-user-api/1.0.0",
+      },
+      { "url": "http://localhost:8000", "description": "Local dev server" },
+    ],
   "paths":
     {
       "/api/users":
@@ -68,21 +36,27 @@
                                 {
                                   "type": "array",
                                   "items":
+                                    { "$ref": "#/components/schemas/User" },
+                                },
+                              "examples":
+                                {
+                                  "mock-server":
                                     {
-                                      "type": "object",
-                                      "properties":
-                                        {
-                                          "id":
-                                            {
-                                              "type": "integer",
-                                              "description": "Användarens unika id",
-                                            },
-                                          "name":
-                                            {
-                                              "type": "string",
-                                              "description": "Användarens namn",
-                                            },
-                                        },
+                                      "summary": "Exempel från SwaggerHub",
+                                      "value":
+                                        [
+                                          { "id": 1, "name": "Kajsa" },
+                                          { "id": 2, "name": "Erik" },
+                                        ],
+                                    },
+                                  "local-server":
+                                    {
+                                      "summary": "Exempel från lokal utveckling",
+                                      "value":
+                                        [
+                                          { "id": 1, "name": "Mandus" },
+                                          { "id": 2, "name": "Hubert" },
+                                        ],
                                     },
                                 },
                             },
@@ -118,6 +92,44 @@
                             },
                         },
                     },
+                },
+            },
+        },
+    },
+  "components":
+    {
+      "schemas":
+        {
+          "User":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "id":
+                    {
+                      "type": "integer",
+                      "description": "Användarens unika id",
+                      "example": 1,
+                    },
+                  "name":
+                    {
+                      "type": "string",
+                      "description": "Användarens namn",
+                      "example": "Exempelanvändare",
+                    },
+                },
+            },
+          "UserResponse":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "message":
+                    {
+                      "type": "string",
+                      "description": "Bekräftelsemeddelande",
+                    },
+                  "user": { "$ref": "#/components/schemas/User" },
                 },
             },
         },
