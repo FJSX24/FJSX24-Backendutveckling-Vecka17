@@ -1,47 +1,20 @@
+// 🧠 Importerar Express samt våra routes och error-middleware
 import express from "express";
-
-// Lägg till app.use(cors()) för att lösa CORS
-import cors from "cors";
-
-import swaggerJsDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
-import userRouterCA from "./routesCA/userCA.js";
-
+import usersRouterCA from "./routesCA/usersCA.js";
+import errorHandlerCA from "./middlewaresCA/errorHandlerCA.js";
 
 const app = express();
-const PORT = 8081;
 
-app.use(cors()); 
-
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "RESTful API",
-      description: "API-dokumentation med Swagger",
-      version: "1.0.0",
-    },
-    servers: [
-      {
-        url: "http://localhost:8081",
-        description: "Lokal utvecklingsserver",
-      },
-    ],
-  },
-  apis: ["./routesCA/*.js"], // Här letar Swagger efter @swagger-kommentarer
-};
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// 🧠 Gör så att vi kan läsa JSON-data från inkommande requests
 app.use(express.json());
-app.use("/api/users", userRouterCA);
 
-app.get("/swagger.json", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.send(swaggerDocs); // detta är resultatet från swaggerJsDoc()
-});
+// 🧠 Alla routes kopplade till användare går via /users
+app.use("/users", usersRouterCA);
 
-app.listen(PORT, () => {
-  console.log(`Server körs på http://localhost:${PORT}`);
+// 🧠 Här placerar vi vår globala felhanteringsmiddleware sist
+app.use(errorHandlerCA);
+
+// 🧪 Startar servern
+app.listen(8080, () => {
+  console.log("Servern kör på http://localhost:8080");
 });

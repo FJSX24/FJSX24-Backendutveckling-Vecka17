@@ -1,170 +1,214 @@
-🧭 Workshop – Torsdag v.17
+🚀 Lektion: Felhantering och validering i Express + MVC + Struktur
 
-📆 Datum: 2025-04-24
-🕘 Tid: 09.00–15.00
-📍 Plats: Ordinarie schema
-🎯 Tema: SwaggerHub, Mockdriven utveckling & backendintegration via async/await
+💡 Lektionsmål
+Efter lektionen ska studenterna:
 
------------------------------
-✨ Syfte
+Förstå grunderna i felhantering i Node/Express.
 
-Att träna på mockdriven utveckling (MDD) genom att arbeta från dokumentation i SwaggerHub mot mock-server och koppla detta till en backend i Express. Frontend används enbart som verktyg för att testa och verifiera att backend följer dokumentationen. Fokus ligger på API-design, dokumentation, async/await och utveckling med kontrakt i centrum.
+Kunna använda try/catch, next() och Express error-handling middleware.
 
------------------------------
-🎯 Lärandemål
+Implementera datavalidering med biblioteket Joi.
 
-K6: Beskriva hur asynkron programmering används för att hantera API-förfrågningar och databasanrop.
+Förstå MVC-strukturen(Youtube video om MVC) och mappstruktur i Express-applikationer. 
 
-F4: Utföra asynkrona operationer för att hantera API-förfrågningar.
+Kunna resonera kring skillnaden mellan MVC och headless.
 
------------------------------
-🧠 Agenda
+Reflektera kring hur olika delar av backendutveckling hänger ihop.
 
-09.00–09.20	🎓 Intro & mål	Vad innebär Mock-Driven Development? Hur kopplar vi frontend till mock-API?
+------------------------------------------------------------
+📝 Lektionsplanering (3 timmar)
 
-09.20–10.30	💻 Workshopdel 1	Ladda upp swagger.yaml till SwaggerHub, aktivera mock-server, testa med fetch & Postman
+✅ PowerPoint: Felhantering, Joi, Middleware, MVC, Struktur, Headless
+✅ Code-Along - Joi & errorHandler (kommenterad kod)
+✅ Visa MVC-struktur + walkthrough av mappstruktur
+🧠 Diskussion: Hur hänger allt ihop?
+✅ Självständig övning + Q&A
 
-10.30–10.45	☕ Paus	–
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
 
-10.45–12.00	💻 Workshopdel 2	Skapa en frontend som hämtar mockdata från SwaggerHub via async/await
+📊 PowerPoint Slides & Talarmanus
 
-12.00–13.00	🍝 Lunchpaus	–
+Slide 1: Felsökning
+🗣️ Talarmanus:
+"Vi börjar med felsökning. Det första steget när något inte fungerar är att isolera problemet. Använder ni Postman eller Insomnia? Om inte, gör det. Skapa en middleware som loggar varje request – det är guld värt när ni jagar buggar. Lägg console.log() i routes, se om det triggas. Använd try/catch för att förhindra att servern kraschar vid fel."
 
-13.00–14.15	💻 Workshopdel 3	Implementera backend i Express utifrån Swagger-spec (Mock → Backend)
+-------------------------------------------------
+Slide 2: Validering
+🗣️ Talarmanus:
+"Validering innebär att vi kontrollerar den inkommande datan – stämmer format, finns alla fält med? Utan validering kan användare eller buggar förstöra våra datamodeller eller orsaka oväntade fel. Validering skyddar både vår server och användarens upplevelse."
 
-14.15–15.00	🔁 Demo & Reflektion	Visa: Swagger → Mock → Frontend → Backend. Diskutera vad som var svårt & vad som funkade
+-------------------------------------------------
+Slide 3: Autentisering
+🗣️ Talarmanus:
+"Autentisering är en typ av validering – men på användarnivå. Vi kontrollerar om användaren är den hen utger sig för att vara. Det görs vanligtvis via JWT eller sessions, men innan det sker måste vi validera användarens inloggningsdata."
 
------------------------------
-📚 PowerPoint & Talarmanus
+-------------------------------------------------
+Slide 4: Joi
+🗣️ Talarmanus:
+"Joi är ett bibliotek som hjälper oss med validering i Node.js. Vi definierar ett schema som anger regler för hur datan ska se ut, och sedan validerar vi inkommande data mot det. Om något är fel får vi ett tydligt felobjekt. Vi använder Joi i routes innan vi skapar eller uppdaterar data."
 
-Slide 1: Vad är Mockdriven utveckling (MDD)?
+-------------------------------------------------
+📊 PowerPoint Slides & Talarmanus (komplettering)
 
-🗣️ "Vi börjar idag inte med koden – vi börjar med dokumentationen. SwaggerHub ger oss en mockserver vi kan anropa direkt – även om backend inte är klar än."
+Slide 5: Middleware - repetition
+🗣️ "Middleware fungerar som ett filter för inkommande requests. Vi kan använda dem för logging, validering, autentisering eller felhantering. De körs i ordning. Använd app.use() för att koppla på middleware."
 
------------------------------
-Slide 2: SwaggerHub mockserver – vad den är och hur vi använder den
+-------------------------------------------------
+Slide 6: MVC – Model View Controller
+🗣️ "MVC står för Model-View-Controller, en designprincip som hjälper oss att separera ansvar i vår applikation. I backendkontext med Express jobbar vi oftast med en modifierad version:
 
-🗣️ "SwaggerHub genererar en virtuell server åt oss utifrån vår swagger.yaml. Vi kan anropa den som om vi hade ett riktigt backend."
+Model – Hanterar datalagring, t.ex. en databasmodell (ex. Mongoose eller en mock).
 
------------------------------
-Slide 3: Från dokumentation till backend
+Controller – Innehåller själva logiken, alltså det som händer när en request tas emot.
 
-🗣️ "När frontend fungerar mot mockservern vet vi att vårt API är tydligt definierat. Då kan vi bygga backend exakt enligt dokumentationen."
+Routes – Tar emot requests från klienten och dirigerar dem till rätt controller.
 
------------------------------
------------------------------
------------------------------
-💻 Code-Along – Från Swagger i Express → SwaggerHub → Mock → Frontend
+Denna separation gör det lättare att:
+Hålla koden testbar
+Återanvända logik
+Arbeta i team parallellt utan att krocka
 
-Här är hur du kan bygga upp torsdagens code-along som en bro mellan Swagger i lokal utveckling (Swagger UI + swagger-jsdoc) och SwaggerHub (mockdriven utveckling + publicering):
-
-🟨 Bakgrund:
-
-Förra veckan dokumenterade ni ert lokala Express-API med Swagger-kommentarer och visade det med Swagger UI.
-Idag tar vi det vidare genom att publicera det i SwaggerHub och koppla på mock-servern – för att sedan verifiera dokumentationen med ett riktigt fetch()-anrop från frontend.
-
-📝 Projektstruktur:
-swagger-to-swaggerhub/
+-------------------------------------------------
+Slide 7: Struktur i backendprojekt
+🗣️ "En typisk struktur i Express kan se ut så här:
+├── controllers/
+├── models/
 ├── routes/
-│   └── user.js          # Innehåller dina Swagger-kommenterade routes
-├── swagger/
-│   └── swagger-export.yaml # Exporterad version till SwaggerHub
-├── index.js               # Express-server med Swagger UI
+├── middlewares/
+├── validators/
+├── index.js
+
+Vi undviker att lägga all logik i routes – vi bryter ut till controllers och validerar med middleware."
+
+-------------------------------------------------
+Slide 8: MVC vs Headless
+🗣️ "MVC bygger ofta hela appen, inklusive HTML-rendering, t.ex. med EJS eller Pug. I ett headless-upplägg bygger vi bara API:et – klienten hämtar data och ansvarar för gränssnittet (SPA, mobilapp osv). Headless gör det enkelt att återanvända samma backend till flera typer av klienter.(webb, mobil, etc).
+
+-------------------------------------------------
+OBS SE VIDEO OM MVC INNAN DENNA:
+
+Slide 9: Hur allt hänger ihop
+🗣️ "Vi har lärt oss följande komponenter i backend:
+
+Node.js – Själva plattformen vi kör vår kod i
+
+Express – Vårt ramverk som förenklar HTTP-server och routing
+
+Middleware – Funktioner som exekveras innan din route-logik körs
+
+Routing – Här bestäms vilken controller som ska svara på vilken endpoint
+
+API – Vår definierade uppsättning endpoints
+
+Validering – Säkerställer att inkommande data är korrekt
+
+Felhantering – Samlar fel på ett strukturerat sätt, visar tydliga felmeddelanden
+
+MVC – Vår kodstruktur som gör det hela läsbart, testbart och skalbart
+
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+💻 Code-Along – Joi & Felhantering
+
+🗣️ Code-Along Start:
+"Hej alla! Nu ska vi först validera inkommande data med Joi, och därefter skapa en global error handler för att fånga och hantera fel på ett strukturerat sätt."
+
+-------------------------------------------------
+🏗️ Projektstruktur:
+
+├── index.js
+├── routes/
+│   └── users.js
+├── middlewares/
+│   └── errorHandler.js
+├── validators/
+│   └── userSchema.js
 ├── package.json
-└── public/
-    └── index.html         # Frontend för att testa mock-anrop
-    └── script.js
 
+-------------------------------------------------
+🔧 1. Installera nödvändiga paket
 
------------------------------
-Del 1 – Återanvänd din tidigare kod från Swagger i Express
+npm init -y
+npm install express joi
 
-✅ Steg 1: Lägg in Swagger-konfigurationen i index.js
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+📝 Skapa huvudfilen: index.js
 
-Genomför den koden
+Genomför den koden.
 
------------------------------
-✅ Steg 2: Kontrollera dina @swagger-kommentarer i routesCA/userCA.js
+-------------------------------------------------
+📝 Skapa routes/users.js
 
-Genomför den koden
+Genomför den koden.
 
------------------------------
-💾 Exportera swagger.yaml
+-------------------------------------------------
+📝 4. Skapa validators/userSchema.js
 
-Gå till din lokala Swagger UI:
-→ http://localhost:8081/api-docs
+Genomför den koden.
 
-📍 Gå till:
-http://localhost:8081/swagger.json
+-------------------------------------------------
+📝 5. Skapa middlewares/errorHandler.js
 
-Det här visar rå JSON för din API-dokumentation.
-(Du kan också högerklicka och "Visa sidkälla", kopiera hela JSON:en)
+Genomför den koden.
 
-Gå till https://editor.swagger.io/
+-------------------------------------------------
 
-Välj "Convert to YAML" om du har JSON
+🔍 Testa API:t live i Postman
 
-Välj File > Save as YAML
+Starta servern:
+node index.js
 
-Spara som swagger/swagger-export.yaml i ditt projekt.
+-------------------------------------------------
+Skicka ett korrekt anrop:
 
------------------------------
-🌐 Importera swagger.yaml till SwaggerHub
+POST till http://localhost:3000/users
 
-Gå till https://app.swaggerhub.com
+Body (JSON):
+{
+  "name": "Mandus",
+  "email": "mandus@folkan.se",
+  "age": 80
+}
 
-Logga in eller skapa ett gratiskonto
+✅ Ska returnera: 201 Created
 
-Klicka på Create New > API
+-------------------------------------------------
+Skicka ett felaktigt anrop (utan e-post):
 
-Fyll i:
+{
+  "name": "Mandus",
+  "age": 35
+}
 
-Name: my-exported-api
+❌ Returnerar 400 + felmeddelande om att e-post saknas
 
-Version: 1.0.0
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+🧠 Reflektionsfrågor till diskussion
 
-Format: YAML
+Vad är skillnaden mellan routing och controller?
 
-Base: OpenAPI 3.0
+Varför är middleware så viktigt i Express?
 
-Klicka på Import file → välj din swagger-export.yaml
+Vad vinner vi på att använda MVC?
 
-Spara → SwaggerHub laddar din dokumentation och visar en mock URL uppe till höger, t.ex.:
-https://virtserver.swaggerhub.com/dittnamn/my-exported-api/1.0.0/api/users
+Hur påverkar filstruktur möjligheten att växa som team?
 
------------------------------
-🧪 Testa att allt fungerar
+Var skulle du lägga logiken för att skapa en användare?
 
-✅ I Postman:
-Skicka GET till din mock-URL (t.ex. /api/users)
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+🗣️ Sammanfattning
+"Vi har idag lärt oss inte bara tekniker som Joi och error middleware, utan också strukturer som gör vårt API hållbart och skalbart. Ni har nu byggstenarna för att skapa professionella backendlösningar – med struktur, säkerhet och förståelse för helheten. Grymt jobbat!"
 
-Du bör få en dummy-respons (SwaggerHub genererar mockdata automatiskt)
-
-✅ I frontend (public/script.js)
-
-Genomför den koden
-
-index.html
-
-Genomför den koden
-
-Öppna filen i webbläsaren (t.ex. via Live Server) – klicka på knappen, och se datan laddas från SwaggerHub-mockservern!
-
------------------------------
------------------------------
------------------------------
-Dags för övningar
-
------------------------------
------------------------------
------------------------------
-🔁 Gruppdiskussion 
-
-Vad lärde ni er om API-design genom att börja med mock?
-
-Kände ni att er dokumentation var tillräcklig?
-
-Vad var enklast? Vad var klurigast?
-
-Hur hade ni gjort i ett riktigt team med frontend/backend?
-
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+🗣️ Självständig Övningar:

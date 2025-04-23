@@ -1,62 +1,33 @@
-🧩 Självständiga övningar
+✍️ Självständig Övningar
 
-🟢 Lätt
+🟢 Lätta Övningar
 
-- Skapa eller uppdatera ett swagger.yaml för en resurs, t.ex. /api/products.
+1. Lägg till ett nytt fält i Joi-schemat, t.ex. phone (valfritt eller required).
 
-- Publicera i SwaggerHub och aktivera mockservern.
+2. Skapa en GET-route som returnerar en statisk användare, t.ex. GET /users/1.
 
-- Testa att mockservern svarar korrekt i Postman.
+3. Skapa en GET-route som returnerar en lista av mock-användare där varje användare valideras med ett Joi-schema innan den skickas som svar.
 
-- Anropa mockservern via fetch() i en enkel HTML-sida – syftet är att verifiera att din dokumentation fungerar som ett API-kontrakt.
+--------------------------------------
+🟠 Medelsvåra Övningar
 
--------------------------
-🟠 Medel
+1. Skapa en PUT /users/:id route som återanvänder Joi-schemat och returnerar ett uppdaterat objekt.
 
-- Lägg till GET, POST och minst en path parameter i din swagger-spec.
+2. Lägg till en error-middleware som skiljer på 404 (Not Found) och valideringsfel.
 
-- Kontrollera att dokumentationen har rätt parameters, requestBody och responses.
+3. Skapa en DELETE /users/:id route där du först kontrollerar att användaren existerar (mock).
 
-- Gör anrop från frontend till dessa endpoints och kontrollera:
+--------------------------------------
+🔴 Svåra Övningar
 
-    - Är det tydligt vad som krävs i varje anrop?
+1. Dela upp projektet i fullständig MVC-struktur med separata controllers, routes och validering.
 
-    - Ser svaren ut som frontend förväntar sig?
+2. Implementera en middleware som kontrollerar om ett fält (t.ex. role) har rätt värde (admin/user).
 
-- Justera dokumentationen om något inte stämmer (t.ex. fel i mock-responsen).
+3. Skapa en POST /login endpoint som validerar e-post och lösenord med Joi och returnerar en fejkad JWT-token (mockat svar).
 
--------------------------
-🔵 Svår
+4. Skapa en POST /products endpoint där du validerar produktdata med Joi och sparar produkten till en mock-array.
 
-- Bygg en Express-backend som exakt matchar din Swagger-dokumentation.
+5. Implementera validering för ett komplext objekt, t.ex. en användare med adresser som är en array av objekt.
 
-    - Samma paths, metoder, req.body och responses.
-
-- Verifiera att frontend fungerar både mot:
-
-    - Mockservern (SwaggerHub)
-
-    - Din lokala backend
-
-- Byt mellan mock-URL och localhost i din frontend (config.js) och se om båda fungerar lika bra.
-
--------------------------
-🧪 Extra Avancerade Utmaningar
-
-- Jobba mock-first: Börja med Swagger-spec → bygg backend enbart utifrån dokumentationen.
-
-- Implementera felhantering i backend (400, 404, 500) enligt din Swagger-spec.
-
-- Lägg till OpenAPI examples i dokumentationen för att visa exempel på JSON som skickas och tas emot.
-
-- Använd swagger-ui-express i din backend för att exponera Swagger-dokumentation lokalt (t.ex. på /api-docs).
-
--------------------------
-✅ Tips
-🧠 Tänk: “Kan någon annan bygga frontend till mitt API bara genom att läsa dokumentationen?”
-
-🔄 Mocken är en spegel av din dokumentation – om mocken är fel är din dokumentation fel.
-
-💡 SwaggerHub visar om din dokumentation är “produktionsklar” – behandla den som ett kontrakt.
-
-🛠 När frontend använder mockservern och det fungerar – vet du att din API-design håller.
+6. Skapa en PATCH /users/:id route där endast vissa fält (t.ex. email eller age) kan uppdateras, och validera datan med ett Joi-subschema.
